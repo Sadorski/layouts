@@ -1,0 +1,39 @@
+<% content_for :left_column do %>
+<h1>All Posts </h1>
+<table class="table table-striped">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Author</th>
+    </tr>
+    <% @posts.each do |post| %>
+    <tr>
+        <td><%= post.title %></td>
+        <td><%=post.content %></td>
+        <td><%= post.user.first_name%> <%= post.user.last_name %></td>
+    </tr>
+    <% end %>
+</table>
+    
+<% end %>
+
+<% content_for :middle_column do %>
+<h1> New Post </h1>
+<form action="/posts/index" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    Title <input type="text" name="title">
+    Content <textarea name="content"></textarea>
+    Author <select name="author">
+                <option value="1">Jim Halpert</option>
+                <option value="2">Pam Beasley</option>
+                <option value="3">Dwight Schrute</option>
+                <option value="4">Michael Scott</option>
+            </select>
+    <input class=btn type=submit name=submit value=Submit>
+</form>
+<% end %>
+<% content_for :right_column do %>
+<h1>Go to Users Page</h1>
+<a class="btn" href="/users/index">All Users</a>
+<% end %>
+<%= render "shared/three_column" %>

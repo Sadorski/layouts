@@ -1,0 +1,30 @@
+<% content_for :left_column do %>
+    <h1> All Users </h1>
+    <table class="table table-striped">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Favorite Language</th>
+        </tr>
+        <% @users.each do | user | %>
+        <tr>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.favorite_language %></td>
+        </tr>
+        <% end %>
+    </table>
+<% end %>
+<% content_for :right_column do %>
+    <h1> New User </h1>
+    <form class="form-control" action="/users/index" method=post>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        First name <input type=text name=user[first_name]>
+        Last name <input type=text name=user[last_name]>
+        Favorite Language <input type=text name=user[favorite_language]>
+        <input class=btn name=submit type=submit value=Submit>
+    </form>
+    <a href="/posts/index">All Posts</a>
+<% end %>
+<%= render "shared/two_column" %>
+
